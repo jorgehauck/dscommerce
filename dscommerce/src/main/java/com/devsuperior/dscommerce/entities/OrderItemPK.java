@@ -5,7 +5,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Embeddable
-public class OrderItemPk {
+public class OrderItemPK {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
@@ -14,9 +14,9 @@ public class OrderItemPk {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public OrderItemPk() {}
+    public OrderItemPK() {}
 
-    public OrderItemPk(Order order, Product product) {
+    public OrderItemPK(Order order, Product product) {
         this.order = order;
         this.product = product;
     }
