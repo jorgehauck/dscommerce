@@ -1,6 +1,7 @@
 package com.devsuperior.dscommerce.dto;
 
 import com.devsuperior.dscommerce.entities.User;
+import com.devsuperior.dscommerce.projections.UserDetailsByEmailProjection;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.time.LocalDate;
@@ -27,6 +28,14 @@ public class UserDTO {
             roles.add(role.getAuthority());
         }
     }
+    public UserDTO(UserDetailsByEmailProjection projection) {
+        id = projection.getId();
+        name = projection.getName();
+        email = projection.getEmail();
+        phone = projection.getPhone();
+        birthDate = projection.getData();
+        roles = projection.getRoles();
+    }
     public Long getId() {
         return id;
     }
@@ -49,5 +58,17 @@ public class UserDTO {
 
     public List<String> getRoles() {
         return roles;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", birthDate=" + birthDate +
+                ", roles=" + roles +
+                '}';
     }
 }
