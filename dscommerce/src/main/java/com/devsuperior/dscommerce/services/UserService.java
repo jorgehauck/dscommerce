@@ -52,7 +52,7 @@ public class UserService implements UserDetailsService {
             user.setPhone(projection.get(0).getPhone());
             user.setBirthDate(projection.get(0).getData());
 
-            for (UserDetailsByEmailProjection userItem: projection) {
+            for (UserDetailsByEmailProjection userItem : projection) {
                  for(String role : userItem.getRoles()) {
                      user.addRole(new Role(role));
                  }
