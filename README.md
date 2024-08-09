@@ -33,7 +33,7 @@ O `dscommerce` é uma aplicação back-end desenvolvida em Java 21 com Spring Bo
 
 1. **Clonar o repositório**:
    ```bash
-   git clone https://github.com/seuusuario/dscommerce.git
+   git clone https://github.com/jorgehauck/dscommerce.git
 
 2. **Navegar até o diretório do projeto**:
    ```bash
