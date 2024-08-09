@@ -1,4 +1,4 @@
-# dscommerce
+# Dscommerce
 [![NPM](https://img.shields.io/npm/l/react)]([https://github.com/devsuperior/sds1-wmazoni/blob/master/LICENSE](https://github.com/jorgehauck/dscommerce/blob/main/LICENSE)) 
 
 ## Descrição
@@ -21,6 +21,8 @@ O `dscommerce` é uma aplicação back-end desenvolvida em Java 21 com Spring Bo
 - **Java 21**
 - **Spring Boot 3.2.5**
 - **OAuth2 e JWT**: Implementação de autenticação e autorização segura para acesso às funcionalidades do sistema.
+- **JPA / Hibernate**
+- **Maven**
 
 ## Perfis de Usuários
 
