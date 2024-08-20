@@ -15,9 +15,7 @@ public class UserDTO {
     private String phone;
     private LocalDate birthDate;
     private List<String> roles = new ArrayList<>();
-
     public UserDTO() {}
-
     public UserDTO(User entity) {
         id = entity.getId();
         name = entity.getName();
@@ -39,36 +37,19 @@ public class UserDTO {
     public Long getId() {
         return id;
     }
-
     public String getName() {
         return name;
     }
-
     public String getEmail() {
         return email;
     }
-
     public String getPhone() {
         return phone;
     }
-
     public LocalDate getBirthDate() {
         return birthDate;
     }
-
     public List<String> getRoles() {
         return roles;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", birthDate=" + birthDate +
-                ", roles=" + roles +
-                '}';
     }
 }

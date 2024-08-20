@@ -1,29 +1,35 @@
 package com.devsuperior.dscommerce.services;
 
+import com.devsuperior.dscommerce.dto.UserInsertDTO;
 import com.devsuperior.dscommerce.dto.UserDTO;
 import com.devsuperior.dscommerce.entities.Role;
 import com.devsuperior.dscommerce.entities.User;
 import com.devsuperior.dscommerce.projections.UserDetailsByEmailProjection;
 import com.devsuperior.dscommerce.projections.UserDetailsProjection;
+import com.devsuperior.dscommerce.repositories.RoleRepository;
 import com.devsuperior.dscommerce.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository repository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RoleRepository roleRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<UserDetailsProjection> result = repository.searchUserAndRolesByEmail(username);
@@ -63,6 +69,19 @@ public class UserService implements UserDetailsService {
             e.printStackTrace();
             throw new UsernameNotFoundException("Email not found");
         }
+    }
+    @Transactional
+    public UserDTO insertUser(UserInsertDTO userDTO) {
+        User user = new User();
+        user.setName(userDTO.getName());
+        user.setEmail(userDTO.getEmail());
+        user.setPhone(userDTO.getPhone());
+        user.setBirthDate(userDTO.getBirthDate());
+        //user.setPassword(encoder.encode(userDTO.getPassword()));
+        user.addRole(new Role("ROLE_CLIENT"));
+
+        user = repository.save(user);
+        return new UserDTO(user);
     }
     @Transactional(readOnly = true)
     public UserDTO getLoggedUser() {
