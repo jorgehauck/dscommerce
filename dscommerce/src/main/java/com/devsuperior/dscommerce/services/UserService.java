@@ -1,5 +1,6 @@
 package com.devsuperior.dscommerce.services;
 
+import com.devsuperior.dscommerce.dto.RoleDTO;
 import com.devsuperior.dscommerce.dto.UserInsertDTO;
 import com.devsuperior.dscommerce.dto.UserDTO;
 import com.devsuperior.dscommerce.entities.Role;
@@ -77,8 +78,12 @@ public class UserService implements UserDetailsService {
         user.setEmail(userDTO.getEmail());
         user.setPhone(userDTO.getPhone());
         user.setBirthDate(userDTO.getBirthDate());
-        //user.setPassword(encoder.encode(userDTO.getPassword()));
-        user.addRole(new Role("ROLE_CLIENT"));
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+
+        for (RoleDTO roleDTO : userDTO.getRoles()) {
+            Role role = roleRepository.getReferenceById(roleDTO.getId());
+            user.getRoles().add(role);
+        }
 
         user = repository.save(user);
         return new UserDTO(user);

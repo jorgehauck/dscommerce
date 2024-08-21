@@ -28,6 +28,6 @@ public class UserController {
         UserDTO newDto = userService.insertUser(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(newDto.getId()).toUri();
-        return ResponseEntity.created(uri).body(dto);
+        return ResponseEntity.created(uri).body(newDto);
     }
 }
