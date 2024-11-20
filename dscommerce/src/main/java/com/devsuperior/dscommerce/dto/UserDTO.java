@@ -3,11 +3,8 @@ package com.devsuperior.dscommerce.dto;
 import com.devsuperior.dscommerce.entities.User;
 import com.devsuperior.dscommerce.projections.UserDetailsByEmailProjection;
 
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class UserDTO {
@@ -17,7 +14,7 @@ public class UserDTO {
     private String phone;
     private LocalDate birthDate;
     private Set<RoleDTO> roles = new HashSet<>();
-    private List<String> authority = new ArrayList<>();
+
     public UserDTO() {}
     public UserDTO(User entity) {
         id = entity.getId();
@@ -33,7 +30,6 @@ public class UserDTO {
         email = projection.getEmail();
         phone = projection.getPhone();
         birthDate = projection.getData();
-        authority = projection.getRoles();
     }
     public Long getId() {
         return id;
@@ -53,7 +49,5 @@ public class UserDTO {
     public Set<RoleDTO> getRoles() {
         return roles;
     }
-    public List<String> getAuthority() {
-        return authority;
-    }
+
 }

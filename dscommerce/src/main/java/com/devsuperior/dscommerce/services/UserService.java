@@ -15,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
@@ -60,7 +59,7 @@ public class UserService implements UserDetailsService {
             user.setBirthDate(projection.get(0).getData());
 
             for (UserDetailsByEmailProjection userItem : projection) {
-                 for(String role : userItem.getRoles()) {
+                 for (String role : userItem.getRoles()) {
                      user.addRole(new Role(role));
                  }
             }

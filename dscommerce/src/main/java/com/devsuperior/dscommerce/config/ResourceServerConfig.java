@@ -63,7 +63,7 @@ public class ResourceServerConfig {
 	}
 
 	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
+	public CorsConfigurationSource corsConfigurationSource() {
 
 		String[] origins = corsOrigins.split(",");
 
@@ -79,7 +79,7 @@ public class ResourceServerConfig {
 	}
 
 	@Bean
-	FilterRegistrationBean<CorsFilter> corsFilter() {
+	public FilterRegistrationBean<CorsFilter> corsFilter() {
 		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(
 				new CorsFilter(corsConfigurationSource()));
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);

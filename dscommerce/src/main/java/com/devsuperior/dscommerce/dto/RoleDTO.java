@@ -1,8 +1,10 @@
 package com.devsuperior.dscommerce.dto;
 
 import com.devsuperior.dscommerce.entities.Role;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class RoleDTO {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long id;
     private String authority;
     public RoleDTO() {}
