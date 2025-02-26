@@ -94,4 +94,11 @@ public class UserService implements UserDetailsService {
         User user = authenticated();
         return new UserDTO(user);
     }
+    public void recuperarSenha(String email) {
+        try {
+            emailService.enviarEmailRecuperacao(email);
+        } catch(Exception e) {
+            throw new RuntimeException("Erro ao enviar o e-mail: "+ e.getMessage());
+        }
+    }
 }
