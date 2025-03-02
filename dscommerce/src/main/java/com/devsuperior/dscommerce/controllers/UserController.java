@@ -42,9 +42,4 @@ public class UserController {
                 .buildAndExpand(newDto.getId()).toUri();
         return ResponseEntity.created(uri).body(newDto);
     }
-    @PostMapping("/resetar-senha")
-    public ResponseEntity<String> recuperarSenha(@RequestBody String email) {
-        userService.recuperarSenha(email);
-        return ResponseEntity.ok("E-mail de recuperação enviado com sucesso!");
-    }
 }
