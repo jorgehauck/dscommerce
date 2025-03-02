@@ -87,18 +87,12 @@ public class UserService implements UserDetailsService {
         }
 
         user = repository.save(user);
+        emailService.enviaEmailBoasVindas(userDTO);
         return new UserDTO(user);
     }
     @Transactional(readOnly = true)
     public UserDTO getLoggedUser() {
         User user = authenticated();
         return new UserDTO(user);
-    }
-    public void recuperarSenha(String email) {
-        try {
-            emailService.enviarEmailRecuperacao(email);
-        } catch(Exception e) {
-            throw new RuntimeException("Erro ao enviar o e-mail: "+ e.getMessage());
-        }
     }
 }
