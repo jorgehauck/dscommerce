@@ -9,6 +9,7 @@ import com.devsuperior.dscommerce.projections.UserDetailsByEmailProjection;
 import com.devsuperior.dscommerce.projections.UserDetailsProjection;
 import com.devsuperior.dscommerce.repositories.RoleRepository;
 import com.devsuperior.dscommerce.repositories.UserRepository;
+import com.devsuperior.dscommerce.services.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -74,21 +75,25 @@ public class UserService implements UserDetailsService {
     }
     @Transactional
     public UserDTO insertUser(UserInsertDTO userDTO) {
-        User user = new User();
-        user.setName(userDTO.getName());
-        user.setEmail(userDTO.getEmail());
-        user.setPhone(userDTO.getPhone());
-        user.setBirthDate(userDTO.getBirthDate());
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        try {
+            User user = new User();
+            user.setName(userDTO.getName());
+            user.setEmail(userDTO.getEmail());
+            user.setPhone(userDTO.getPhone());
+            user.setBirthDate(userDTO.getBirthDate());
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
-        for (RoleDTO roleDTO : userDTO.getRoles()) {
-            Role role = roleRepository.getReferenceById(roleDTO.getId());
-            user.getRoles().add(role);
+            for (RoleDTO roleDTO : userDTO.getRoles()) {
+                Role role = roleRepository.getReferenceById(roleDTO.getId());
+                user.getRoles().add(role);
+            }
+
+            user = repository.save(user);
+            emailService.enviaEmailBoasVindas(userDTO);
+            return new UserDTO(user);
+        } catch (Exception e) {
+            throw new DatabaseException("Já existe um usuário cadastrado com o e-mail informado!");
         }
-
-        user = repository.save(user);
-        emailService.enviaEmailBoasVindas(userDTO);
-        return new UserDTO(user);
     }
     @Transactional(readOnly = true)
     public UserDTO getLoggedUser() {
