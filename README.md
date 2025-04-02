@@ -42,6 +42,17 @@ O `dscommerce` é uma aplicação back-end desenvolvida em Java 21 com Spring Bo
    ```bash
    ./mvnw spring-boot:run
 
+
+## Documentação (Swagger)
+A documentação completa da API pode ser acessada em:
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+![Swagger Documentação](https://github.com/jorgehauck/assets/blob/main/dscommerce/Swagger1.png)
+![Swagger Documentação](https://github.com/jorgehauck/assets/blob/main/dscommerce/Swagger2.png)
+
+
 # Autor
 
 José Jorge Hauck Júnior
